@@ -5,7 +5,7 @@
  * Plugin URI:  https://themewant.com/downloads/easy-menu-icons-pro/
  * Author:      Themewant
  * Author URI:  http://themewant.com/
- * Version:     1.1.2
+ * Version:     1.1.3
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: easy-menu-icons
@@ -15,7 +15,7 @@
 
     if(!class_exists('EMICONS_PRO')) {
 
-        define( 'EMICONS_VERSION', '1.1.2' );
+        define( 'EMICONS_VERSION', '1.1.3' );
         define( 'EMICONS_PL_ROOT', __FILE__ );
         define( 'EMICONS_PL_URL', plugins_url( '/', EMICONS_PL_ROOT ) );
         define( 'EMICONS_PL_PATH', plugin_dir_path( EMICONS_PL_ROOT ) );

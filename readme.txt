@@ -1,9 +1,9 @@
 === Easy Menu Icons - Awesome Menu Icons ===
 Contributors: themewant
 Tags: menu icons, nav-menu, nav icon, navigation
-Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.1.2
+Requires at least: 6.0
+Tested up to: 7.0
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,9 @@ See https://themewant.com/downloads/easy-menu-icons-pro/ screenshots
 8. Icon Demo From Twenty Twenty Theme
 
 == Changelog ==
+
+= 1.1.3 - 23 May 2026 =
+- Added dashboard story notice
 
 = 1.1.2 - 29 Dec 2025 =
 - Improved made Compatible with Latest WP
