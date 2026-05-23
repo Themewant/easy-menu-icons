@@ -1,14 +1,18 @@
 (function ($) {
     'use strict';
 
-    var DATA = window.emiconsNoticeData || {};
+    // Must match wp_localize_script object name in NoticeDashboard.php
+    // (EMICONSNoticeData). Case matters — a mismatch silently breaks the
+    // dismiss AJAX call.
+    var DATA = window.EMICONSNoticeData || {};
 
     function persistDismiss(noticeId) {
         if (!noticeId || !DATA.ajaxUrl || !DATA.nonce) {
             return;
         }
+        // Action name must match wp_ajax_<name> in NoticeDashboard.php.
         $.post(DATA.ajaxUrl, {
-            action: 'emicons_notice_ignore_plugin_notice',
+            action: 'EMICONS_notice_ignore_plugin_notice',
             nonce: DATA.nonce,
             notice_id: noticeId
         });
