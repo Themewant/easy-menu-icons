@@ -3,7 +3,7 @@ Contributors: themewant
 Tags: menu icons, nav-menu, nav icon, navigation
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,13 @@ See https://themewant.com/downloads/easy-menu-icons-pro/ screenshots
 
 == Changelog ==
 
+= 1.1.4 - 13 Jul 2026 =
+- Security: Fixed an authenticated stored Cross-Site Scripting (XSS) vulnerability in the menu item icon settings. Added capability and nav menu item ownership checks to the icon AJAX handlers and escaped icon output on the front-end navigation. Props to Artus KG for the responsible disclosure.
+- Improved: Icons now load directly from the plugin files (no HTTP request) for faster, more reliable loading.
+- Fixed: Removed PHP notices and a case where the icon failed to render when no style was saved.
+- Improved: Extra output escaping and translatable admin strings.
+- Housekeeping: Added safe fallbacks and general code cleanup.
+
 = 1.1.3 - 23 May 2026 =
 - Added dashboard story notice
 
@@ -125,3 +132,7 @@ This plugin makes use of the following third-party api and libraries to provide 
 Themewant
 This api only send notice and offer to the user. User dashboard loads the notice and display.
 Source: https://themewant.com/menuicon
+
+License: https://reactheme.com/products/license/
+Privacy Policy: https://themewant.com/privacy-policy/
+Terms of Services: https://themewant.com/terms-of-condition/

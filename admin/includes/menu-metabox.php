@@ -7,9 +7,6 @@ if ( !class_exists('EMICONS_Nav')) {
         }
 
         public function emicons_pop_up_content(){
-            ob_start();
-            $contents = ob_get_clean();
-
             ?>
                 <div id="emicons-menu-setting-modal" style="display: none;">
                     <div class="emicons-menu-overlay"></div>
@@ -40,18 +37,7 @@ if ( !class_exists('EMICONS_Nav')) {
                         </div>
                     </div>
                 </div>
-
-            
-       
-
-
-
             <?php
-
-            
-            echo esc_html($contents);
-
-            
         }
     }
     $EMICONS_Nav = new EMICONS_Nav();

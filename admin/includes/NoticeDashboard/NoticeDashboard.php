@@ -180,11 +180,13 @@ class EMICONS_NoticeDashboard {
             return false;
         }
         if ( ! isset( $GLOBALS['thewtmc_noticebar_claims'] ) ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Intentionally shared across sibling ThemeWant plugins for cross-plugin dedup; must NOT be plugin-prefixed.
             $GLOBALS['thewtmc_noticebar_claims'] = array();
         }
         if ( isset( $GLOBALS['thewtmc_noticebar_claims'][ $notice_id ] ) ) {
             return false;
         }
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Intentionally shared across sibling ThemeWant plugins for cross-plugin dedup; must NOT be plugin-prefixed.
         $GLOBALS['thewtmc_noticebar_claims'][ $notice_id ] = true;
         return true;
     }
@@ -302,6 +304,7 @@ class EMICONS_NoticeDashboard {
         // empty after dedup. If nothing is left for us to render, skip
         // registering the widget entirely.
         if ( ! isset( $GLOBALS['thewtmc_widget_claims'] ) ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Intentionally shared across sibling ThemeWant plugins for cross-plugin dedup; must NOT be plugin-prefixed.
             $GLOBALS['thewtmc_widget_claims'] = array();
         }
 
@@ -320,6 +323,7 @@ class EMICONS_NoticeDashboard {
             if ( $this->get_notice_status( $id ) === 'true' ) {
                 continue;
             }
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Intentionally shared across sibling ThemeWant plugins for cross-plugin dedup; must NOT be plugin-prefixed.
             $GLOBALS['thewtmc_widget_claims'][ $id ] = true;
             $this->my_widget_notice_ids[ $id ]       = true;
         }

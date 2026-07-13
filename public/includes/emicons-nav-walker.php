@@ -34,6 +34,10 @@ class EMICONS_Add_Icons {
         
         $emicons_item_settings = get_post_meta( $item->ID, 'emicons_settings', true );
 
+        // Initialize before the css block so it's always defined even when a
+        // menu item has 'content' saved but no 'css' key yet.
+        $menu_item_icon_source = isset( $emicons_item_settings['content']['icon_source'] ) ? $emicons_item_settings['content']['icon_source'] : '';
+
         if(isset($emicons_item_settings['css'])){
     
 
@@ -45,9 +49,7 @@ class EMICONS_Add_Icons {
                 $EMICONS_item_icon_position = $emicons_item_css['icon_position'];
             }
     
-      
-            $menu_item_icon_source = $emicons_item_settings['content']['icon_source'];
-    
+
             if( isset( $emicons_item_css['icon_color']) && !empty( $emicons_item_css['icon_color'] ) ){
                 $icon_styles .= 'color:'.$emicons_item_css['icon_color'] .';';
             }
@@ -95,11 +97,12 @@ class EMICONS_Add_Icons {
                 $icon_class = ' icon-left ';
             }
 
+            $emicons_icon_classes = 'emicons menu-icon ' . $icon_class . $emicons_item_settings['content']['menu_icon'];
 
             if($menu_item_icon_source == 'dashicon'){
-                $menu_item_icon = '<span class="emicons menu-icon '. $icon_class . $emicons_item_settings['content']['menu_icon'].'" style="'.$icon_styles.'"></span>';
+                $menu_item_icon = '<span class="'. esc_attr( $emicons_icon_classes ) .'" style="'. esc_attr( $icon_styles ) .'"></span>';
             }else if($menu_item_icon_source == 'fontawesome'){
-                $menu_item_icon = '<i class="emicons menu-icon '. $icon_class . $emicons_item_settings['content']['menu_icon'].'" style="'.$icon_styles.'"></i>';
+                $menu_item_icon = '<i class="'. esc_attr( $emicons_icon_classes ) .'" style="'. esc_attr( $icon_styles ) .'"></i>';
             }
         
         }

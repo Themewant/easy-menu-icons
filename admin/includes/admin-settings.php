@@ -236,9 +236,6 @@ if ( !class_exists('EMICONS_admin_settings')) {
                     
                 </form>
             </div>
-            
-
-    
             <?php
         }
     
@@ -249,9 +246,6 @@ if ( !class_exists('EMICONS_admin_settings')) {
     
         public function emicons_render_menu_opts() {
     
-            ?>
-        
-            <?php
     
             $emicons_settings_fields = $this->emicons_get_settings_fields();    
 
@@ -286,16 +280,16 @@ if ( !class_exists('EMICONS_admin_settings')) {
                             <label><?php echo esc_html($field['label']) ?></label>
                             <div class="settings-item-group">
                                 <?php 
-                                    foreach ($dimension_fields as $key => $field) {
+                                    foreach ($dimension_fields as $key => $dim_field) {
                                         $value = !empty($val[$key]) ? $val[$key] : '';
                                         printf(
                                             '<div class="settings-item">
-                                            <input 
-                                            type="'. esc_html($field['type']) .'" 
-                                            name="emicons_options['.esc_html($field_name).']['. esc_html($key) .']" 
-                                            id="emicons_render_menu_opts" value="%s" 
-                                            placeholder="'. esc_html($field['placeholder']).'">
-                                            </div>',esc_html($value)
+                                            <input
+                                            type="'. esc_attr($dim_field['type']) .'"
+                                            name="emicons_options['.esc_attr($field_name).']['. esc_attr($key) .']"
+                                            id="emicons_render_menu_opts" value="%s"
+                                            placeholder="'. esc_attr($dim_field['placeholder']).'">
+                                            </div>',esc_attr($value)
                                         );
                                     }
                                 ?>
@@ -314,18 +308,18 @@ if ( !class_exists('EMICONS_admin_settings')) {
                         $val = $field['default'];
                     }
     
-                    $placeholder = isset($field['placeholder']) && !empty($field['placeholder']) ? esc_html($field['placeholder']) : '';
-                    $ex_text = isset($field['ex_text']) && !empty($field['ex_text']) ? esc_html($field['ex_text']) : '';
+                    $placeholder = isset($field['placeholder']) && !empty($field['placeholder']) ? $field['placeholder'] : '';
+                    $ex_text = isset($field['ex_text']) && !empty($field['ex_text']) ? $field['ex_text'] : '';
 
                     printf(
                         '<div class="settings-item"><label>'. esc_html($field['label']) .'</label>
-                        <input 
-                        type="'. esc_html($field['type']).'" 
-                        name="emicons_options['. esc_html($field['name']) .']" 
-                        id="emicons_render_menu_opts" value="%s" 
-                        placeholder="'. esc_html($placeholder).'">
+                        <input
+                        type="'. esc_attr($field['type']).'"
+                        name="emicons_options['. esc_attr($field['name']) .']"
+                        id="emicons_render_menu_opts" value="%s"
+                        placeholder="'. esc_attr($placeholder).'">
                         <span>'. esc_html($ex_text) .'</span>
-                        </div>',esc_html($val)
+                        </div>',esc_attr($val)
                     );
                 }
                 

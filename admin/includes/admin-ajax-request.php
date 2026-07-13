@@ -6,13 +6,10 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
         function __construct(){
 
             add_action( "wp_ajax_emicons_update_menu_options", array ( $this, 'emicons_update_menu_options' ) );
-            add_action( "wp_ajax_nopriv_emicons_update_menu_options", array ( $this, 'emicons_update_menu_options' ) );
 
             add_action( "wp_ajax_emicons_get_menu_options", array ( $this, 'emicons_get_menu_options' ) );
-            add_action( "wp_ajax_nopriv_emicons_get_menu_options", array ( $this, 'emicons_get_menu_options' ) );
 
             add_action( "wp_ajax_emicons_delete_menu_options", array ( $this, 'emicons_delete_menu_options' ) );
-            add_action( "wp_ajax_nopriv_emicons_delete_menu_options", array ( $this, 'emicons_delete_menu_options' ) );
 
             add_action( 'wp_nav_menu_item_custom_fields', array( $this, 'emicons_item_icon' ), 10, 2 );
             
@@ -21,7 +18,6 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
 
         function emicons_item_icon( $item_id, $item ) {
 
-            $EMICONS = new EMICONS();
             $emicons_item_settings = get_post_meta( $item_id, 'emicons_settings', true );
             $emicons_item_icon_source = isset($emicons_item_settings['content']['icon_source']) ? $emicons_item_settings['content']['icon_source'] : '';
             $emicons_item_icon = isset($emicons_item_settings['content']['menu_icon']) ? $emicons_item_settings['content']['menu_icon'] : '';
@@ -30,13 +26,11 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
             if(!empty($emicons_item_icon_source) && !empty($emicons_item_icon)){
 
                 if($emicons_item_icon_source == 'dashicon'){
-                    $icon_html = '<span class="'.$emicons_item_icon.'"></span>';
+                    $icon_html = '<span class="'. esc_attr( $emicons_item_icon ) .'"></span>';
                 }else if($emicons_item_icon_source == 'fontawesome'){
-                    $icon_html = '<i class="'.$emicons_item_icon.'"></i>';
+                    $icon_html = '<i class="'. esc_attr( $emicons_item_icon ) .'"></i>';
                 }
             }
-
-            
                 ?>
                     <div class="emicons_saved_icon_wrapper <?php echo !empty($emicons_item_icon) ? esc_attr( 'has-icon') : '' ?>" style="clear: both;">
                         <?php 
@@ -57,21 +51,27 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
         }
         
 
-        public function emicons_update_menu_options($menu_id) {
+        public function emicons_update_menu_options() {
 
             check_ajax_referer('emicons_nonce', 'nonce');
-            
+
+            if ( ! current_user_can( 'edit_theme_options' ) ) {
+                wp_send_json_error( array( 'message' => esc_html__( 'You are not allowed to do this.', 'easy-menu-icons' ) ), 403 );
+            }
+
             if(isset($_POST['settings']) && isset($_POST['menu_id'])){
 
+                $menu_item_id = !empty($_POST['menu_item_id']) ? absint( wp_unslash($_POST['menu_item_id']) ) : 0;
 
-                $menu_id = !empty($_POST['menu_id']) ? sanitize_text_field(wp_unslash($_POST['menu_id'])) : '';
-                $menu_item_id = !empty($_POST['menu_item_id']) ? sanitize_text_field(wp_unslash($_POST['menu_item_id'])) : '';
-                $menu_id = absint( $menu_id );
+                // Only allow writing meta to a genuine nav menu item, never an arbitrary post ID.
+                if ( ! $menu_item_id || get_post_type( $menu_item_id ) !== 'nav_menu_item' ) {
+                    wp_send_json_error( array( 'message' => esc_html__( 'Invalid menu item.', 'easy-menu-icons' ) ), 400 );
+                }
 
-
+                $settings = array();
                 if( isset( $_POST['settings'] ) && !empty( $_POST['settings'] ) ) {
                     $settings = array_map('sanitize_text_field', wp_unslash($_POST['settings']));
-                } 
+                }
 
 
                 if( isset($_POST['css']) && !empty( $_POST['css'] ) ) {
@@ -81,14 +81,9 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                     return;
                 }
 
-                    
-                
-                
                 wp_send_json_success([
                    'message' => esc_html__( 'Successfully data saved','easy-menu-icons' )
                 ]);
-                
-                wp_die();
 
             }
 
@@ -97,9 +92,20 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
 
         public function emicons_delete_menu_options() {
             check_ajax_referer('emicons_nonce', 'nonce');
+
+            if ( ! current_user_can( 'edit_theme_options' ) ) {
+                wp_send_json_error( array( 'message' => esc_html__( 'You are not allowed to do this.', 'easy-menu-icons' ) ), 403 );
+            }
+
             if(isset($_POST['menu_item_id'])){
 
-                $menu_item_id = sanitize_text_field(wp_unslash($_POST['menu_item_id']));
+                $menu_item_id = absint( wp_unslash( $_POST['menu_item_id'] ) );
+
+                // Only allow deleting meta from a genuine nav menu item, never an arbitrary post ID.
+                if ( ! $menu_item_id || get_post_type( $menu_item_id ) !== 'nav_menu_item' ) {
+                    wp_send_json_error( array( 'message' => esc_html__( 'Invalid menu item.', 'easy-menu-icons' ) ), 400 );
+                }
+
                 $emicons_item_settings = get_post_meta( $menu_item_id, 'emicons_settings', true );
 
                 if(isset($emicons_item_settings)){
@@ -117,14 +123,30 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
 
             check_ajax_referer('emicons_nonce', 'nonce');
 
+            if ( ! current_user_can( 'edit_theme_options' ) ) {
+                wp_send_json_error( array( 'message' => esc_html__( 'You are not allowed to do this.', 'easy-menu-icons' ) ), 403 );
+            }
+
             if(isset($_POST['menu_item_id'])){
 
-                $EMICONS = new EMICONS();
-                
+                $menu_item_id = absint( wp_unslash( $_POST['menu_item_id'] ) );
 
-                $menu_item_id = sanitize_text_field(wp_unslash($_POST['menu_item_id']));
+                // Only allow reading meta from a genuine nav menu item, never an arbitrary post ID.
+                if ( ! $menu_item_id || get_post_type( $menu_item_id ) !== 'nav_menu_item' ) {
+                    wp_send_json_error( array( 'message' => esc_html__( 'Invalid menu item.', 'easy-menu-icons' ) ), 400 );
+                }
 
                 $emicons_item_css = '';
+
+                // Initialize style values so the markup below never references
+                // an undefined variable when a menu item has no saved styles yet.
+                $icon_color         = '';
+                $icon_font_size     = '';
+                $icon_margin_left   = '';
+                $icon_margin_right  = '';
+                $icon_margin_top    = '';
+                $icon_margin_bottom = '';
+                $icon_position      = '';
 
                 $emicons_item_settings = get_post_meta( $menu_item_id, 'emicons_settings', true );
 
@@ -152,7 +174,6 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                 if($emicons_item_icon_source !='dashicon' && $emicons_item_icon_source !='fontawesome'){
                     $emicons_item_icon_source_err = 'emicons-pro-source-error';
                 }
-
                 ?>
                     <div id="tabs-content">
                         <div id="tab1" class="tab-content">
@@ -184,11 +205,7 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                             </form>
                             
                         </div>
-
-
-
                         <?php
-
                             if(isset($emicons_item_settings['css'])){
 
                                 $emicons_item_css = $emicons_item_settings['css'];
@@ -224,8 +241,6 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                            
 
                         ?>                        
-                    
-
                         <div id="tab2" class="tab-content" style="display: none;">
                             <form action="" onsubmit="return false" id='emicons_items_css'>       
                                 
@@ -253,13 +268,6 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                                                 </label>
                                             </div>
                                         </li>
-
-
-                                        <?php 
-                                        
-                                    
-                                            
-                                        ?>
                                         <li>
                                             <div class="option-label">Spacing: </div>
                                             <div class="option-inputs">
@@ -301,9 +309,7 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                             </form>
                         </div>
                     </div> <!-- END tabs-content -->
-
                 <?php
-
             }
             
             wp_die();
@@ -313,4 +319,3 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
     
     $EMICONS_Admin_Ajax = new EMICONS_Admin_Ajax();
 }
-
