@@ -9,8 +9,6 @@
              .on( 'click.EmiconsAdmin', '.emicons-menu-modal-closer', this.closeEmiconsModal )
              .on( 'click.EmiconsAdmin', '.save-rt-menu-item-options', this.updateEmiconsItemSettings )
              .on( 'click.EmiconsAdmin', '.emicons_remove_icon_toggle_in_nav_item', this.deleteEmiconsItemSettings )
-             .on( 'click.EmiconsAdmin', '.emicons_pro_warning_img', this.alertForLicenseActive )
-             .on( 'click.EmiconsAdmin', '.emicons_set_icon_toggle_in_nav_item_free', this.alertForLicenseActive )
              .on( 'change.EmiconsAdmin', '#emicons_source_select', this.getMenuIconOptionsBySource )
              .on( 'click.EmiconsAdmin', '.emicons-notice .notice-dismiss', this.ignorePluginNotice )
              ;
@@ -29,9 +27,6 @@
             },
             cache: false,
         });
-    },
-    alertForLicenseActive: function () { 
-        alert('Please activate plugin license to use this advanced features!');
     },
     openEmiconsModal: function (that) { 
         $('#emicons-menu-setting-modal').css('display', 'flex');

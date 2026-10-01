@@ -50,33 +50,31 @@ class EMICONS_Add_Icons {
             }
     
 
-            if( isset( $emicons_item_css['icon_color']) && !empty( $emicons_item_css['icon_color'] ) ){
-                $icon_styles .= 'color:'.$emicons_item_css['icon_color'] .';';
+            $emicons_color = isset( $emicons_item_css['icon_color'] ) ? emicons_sanitize_css_color( $emicons_item_css['icon_color'] ) : '';
+            if ( '' !== $emicons_color ) {
+                $icon_styles .= 'color:' . $emicons_color . ';';
             }
     
         
             if($menu_item_icon_source == 'custom'){
-                if( isset( $emicons_item_css['icon_font_size']) && !empty( $emicons_item_css['icon_font_size'] ) ){
-                    $icon_styles .= 'height:'.$emicons_item_css['icon_font_size'] .';';
+                $emicons_size = isset( $emicons_item_css['icon_font_size'] ) ? emicons_sanitize_css_length( $emicons_item_css['icon_font_size'] ) : '';
+                if ( '' !== $emicons_size ) {
+                    $icon_styles .= 'height:' . $emicons_size . ';';
                 }
             }else{
-                if( isset( $emicons_item_css['icon_font_size']) && !empty( $emicons_item_css['icon_font_size'] ) ){
-                    $icon_styles .= 'font-size:'.$emicons_item_css['icon_font_size'] . ';';
+                $emicons_size = isset( $emicons_item_css['icon_font_size'] ) ? emicons_sanitize_css_length( $emicons_item_css['icon_font_size'] ) : '';
+                if ( '' !== $emicons_size ) {
+                    $icon_styles .= 'font-size:' . $emicons_size . ';';
                 }
             }
             
     
-            if( isset( $emicons_item_css['icon_margin_left']) && !empty( $emicons_item_css['icon_margin_left'] ) ){
-                $icon_styles .= 'margin-left:'.$emicons_item_css['icon_margin_left'] . ';';
-            }
-            if( isset( $emicons_item_css['icon_margin_right']) && !empty( $emicons_item_css['icon_margin_right'] ) ){
-                $icon_styles .= 'margin-right:'.$emicons_item_css['icon_margin_right'] . ';';
-            }
-            if( isset( $emicons_item_css['icon_margin_top']) && !empty( $emicons_item_css['icon_margin_top'] ) ){
-                $icon_styles .= 'margin-top:'.$emicons_item_css['icon_margin_top'] . ';';
-            }
-            if( isset( $emicons_item_css['icon_margin_bottom']) && !empty( $emicons_item_css['icon_margin_bottom'] ) ){
-                $icon_styles .= 'margin-bottom:'.$emicons_item_css['icon_margin_bottom'] . ';';
+            foreach ( array( 'left', 'right', 'top', 'bottom' ) as $emicons_side ) {
+                $emicons_key    = 'icon_margin_' . $emicons_side;
+                $emicons_margin = isset( $emicons_item_css[ $emicons_key ] ) ? emicons_sanitize_css_length( $emicons_item_css[ $emicons_key ] ) : '';
+                if ( '' !== $emicons_margin ) {
+                    $icon_styles .= 'margin-' . $emicons_side . ':' . $emicons_margin . ';';
+                }
             }
     
         }

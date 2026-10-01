@@ -15,6 +15,57 @@ if ( ! function_exists( 'emicons_sanitize_css_value' ) ) {
     }
 }
 
+if ( ! function_exists( 'emicons_sanitize_css_color' ) ) {
+    /**
+     * Validates a stored colour before it reaches a stylesheet or a style attribute.
+     *
+     * Returns '' for anything that is not a hex colour, an rgb()/rgba()/hsl()/hsla()
+     * value or a plain CSS colour keyword, so a stored value cannot smuggle extra
+     * declarations in alongside the colour.
+     *
+     * @param mixed $value Raw stored value.
+     * @return string A safe colour, or '' if the value is not one.
+     */
+    function emicons_sanitize_css_color( $value ) {
+        $value = trim( (string) $value );
+
+        if ( '' === $value ) {
+            return '';
+        }
+        $hex = sanitize_hex_color( $value );
+        if ( $hex ) {
+            return $hex;
+        }
+        if ( preg_match( '/^(rgb|rgba|hsl|hsla)\(\s*[0-9.,%\s\/deg-]+\)$/i', $value ) ) {
+            return $value;
+        }
+        if ( preg_match( '/^[a-z]{3,20}$/i', $value ) ) {
+            return strtolower( $value );
+        }
+        return '';
+    }
+}
+
+if ( ! function_exists( 'emicons_sanitize_css_length' ) ) {
+    /**
+     * Validates a stored length (font size, margin) as a number plus an allowed unit.
+     *
+     * @param mixed $value Raw stored value.
+     * @return string A safe length, or '' if the value is not one.
+     */
+    function emicons_sanitize_css_length( $value ) {
+        $value = trim( (string) $value );
+
+        if ( '' === $value ) {
+            return '';
+        }
+        if ( preg_match( '/^-?\d+(\.\d+)?(px|em|rem|%|vh|vw|pt)?$/', $value ) ) {
+            return $value;
+        }
+        return '';
+    }
+}
+
 add_action( 'wp_enqueue_scripts', 'emicons_dynamic_css' );
 function emicons_dynamic_css() {
 

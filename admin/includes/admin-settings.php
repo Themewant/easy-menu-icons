@@ -152,7 +152,6 @@ if ( !class_exists('EMICONS_admin_settings')) {
                     <div class="tabs emicons-menu-settings-tabs">
                         <ul id="tabs-nav">
                             <li><a href="#tab_menu_styles"><?php esc_html_e( 'Icon Styles', 'easy-menu-icons' )?></a></li>
-                            <li><a href="#tab_menu_features"><?php esc_html_e( 'Pro Features', 'easy-menu-icons' )?></a></li>
                         </ul> <!-- END tabs-nav -->
                         <div class="tab-contents-wrapper">
 
@@ -168,65 +167,6 @@ if ( !class_exists('EMICONS_admin_settings')) {
                                 </div>
                             </div>
 
-                            <div id="tab_menu_features" class="tab-content" style="display: none;">
-                                <h1><?php esc_html_e( 'Easy Menu Icons Free Vs RT Easy Menu Icons Pro Features', 'easy-menu-icons' ); ?></h1>
-                                
-                                <div class="emicons-features-list-wrapper">
-                                    <div class="emicons-features-list emicons-features-list-free">
-                                        <h3><?php esc_html_e( 'RT Menu Free', 'easy-menu-icons' ); ?></h3>
-                                        <ul>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'DashIcon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Fontawesome Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Elusive Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Elegant Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Foundation Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Themify Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Fontello Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Generic Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-no"></span><?php esc_html_e( 'Custom Icon', 'easy-menu-icons' ); ?></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="emicons-features-list emicons-features-list-free">
-                                        <h3><?php esc_html_e( 'RT Menu Pro', 'easy-menu-icons' ); ?></h3>
-                                        <ul>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'DashIcon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Fontawesome Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Elusive Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Elegant Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Foundation Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Themify Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Fontello Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Generic Icon', 'easy-menu-icons' ); ?></li>
-                                            <li><span class="dashicons dashicons-yes"></span><?php esc_html_e( 'Custom Icon', 'easy-menu-icons' ); ?></li>
-                                        </ul>
-                                        <a href="<?php echo esc_url( 'https://themewant.com/downloads/easy-menu-icons-pro/' ); ?>" target="_blank" class="button button-primary">
-                                            <?php esc_html_e( 'Upgrade to Pro', 'easy-menu-icons' ); ?>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="emicons-promo-notice" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 20px; border-radius: 8px; margin-top: 25px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                                    <span style="font-size: 16px; font-weight: 600;">
-                                        <?php
-                                        printf(
-                                            wp_kses(
-                                                /* translators: %s is the Facebook group link */
-                                                __( '🎉 Join our <a href="%s" target="_blank" style="color: #FFD700; text-decoration: underline; font-weight: bold;">Facebook group</a> and enjoy an exclusive 10%% discount on your next purchase!', 'easy-menu-icons' ),
-                                                array(
-                                                    'a' => array(
-                                                        'href'   => array(),
-                                                        'target' => array(),
-                                                        'style'  => array(),
-                                                    ),
-                                                )
-                                            ),
-                                            esc_url( 'https://web.facebook.com/groups/themewant' )
-                                        );
-                                        ?>
-                                    </span>
-                                </div>
-                            </div>
 
 
                            

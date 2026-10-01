@@ -1,16 +1,17 @@
-=== Easy Menu Icons - Awesome Menu Icons ===
+=== Easy Menu Icons ===
 Contributors: themewant
 Tags: menu icons, nav-menu, nav icon, navigation
 Requires at least: 6.0
-Tested up to: 7.0
-Stable tag: 1.1.4
+Requires PHP: 7.2
+Tested up to: 7.1
+Stable tag: 1.1.5
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The Easy Menu Icons Plugin for WordPress menu icon plugin where can decoration your menu item with different types icon.
+Add Dashicons or Font Awesome icons to any WordPress menu item, and style them per item or site-wide.
 
 == Description ==
-Easy Menu Icons is a versatile and user-friendly plugin that enhances your WordPress menus with icon support. This plugin allows you to effortlessly add icons to your menu items, making your navigation more intuitive and visually appealing. With support for a wide range of icon libraries, including Dashicons, FontAwesome, Elusive Icons, Fontello Icons, and even custom icons, Easy Menu Icons provides unparalleled flexibility and customization options for your WordPress menus.
+Easy Menu Icons is a versatile and user-friendly plugin that enhances your WordPress menus with icon support. This plugin allows you to effortlessly add icons to your menu items, making your navigation more intuitive and visually appealing. It ships the complete Dashicons and Font Awesome libraries, giving you thousands of icons to choose from, and provides flexibility and customization options for your WordPress menus.
 
 https://www.youtube.com/watch?v=0fM4Z_94vzk
 
@@ -47,10 +48,10 @@ https://www.youtube.com/watch?v=0fM4Z_94vzk
 
 == Frequently Asked Questions ==
 = How do I add an icon to a menu item? =
-To add an icon to a menu item, go to the WordPress dashboard and navigate to Appearance > Menus. Select the menu item you want to add an icon to, and you will see an option to choose an icon from Dashicons, FontAwesome, Elusive Icons, Fontello Icons, or upload your own custom icon. Simply select your desired icon and save your changes.
+To add an icon to a menu item, go to the WordPress dashboard and navigate to Appearance > Menus. Select the menu item you want to add an icon to, and you will see an option to choose an icon from Dashicons or Font Awesome. Simply select your desired icon and save your changes.
 
 =  Can I use my own custom icons? =
-Yes, you can use your own custom icons! The Easy Menu Icons plugin allows you to upload custom icons directly from the menu settings. Just select the "Custom Icon" option and upload your icon file.
+Uploading your own icon files is part of the Pro version. The free plugin ships the full Dashicons and Font Awesome libraries, which you can apply to any menu item.
 
 = Is the plugin compatible with all WordPress themes? =
 Yes, the Easy Menu Icons plugin is designed to be compatible with all WordPress themes. If you encounter any issues with specific themes, please contact our support team for assistance.
@@ -62,7 +63,7 @@ For the Easy Menu Icons plugin to work correctly, your theme should use the defa
 This is a bug with the font icon itself. When the font is updated, this plugin will update its font too.
 
 = Can I use multiple icon libraries at the same time? =
-Absolutely! The Easy Menu Icons plugin allows you to mix and match icons from different libraries (Dashicons, FontAwesome, Elusive Icons, Fontello Icons) on the same menu, giving you the flexibility to create a unique and personalized menu design.
+Absolutely! The Easy Menu Icons plugin allows you to mix and match icons from both bundled libraries (Dashicons and Font Awesome) on the same menu, giving you the flexibility to create a unique and personalized menu design.
 
 
 
@@ -80,13 +81,21 @@ See https://themewant.com/downloads/easy-menu-icons-pro/ screenshots
 1. Add Icon
 2. Change Icon
 3. Select Icon and Icon Library
-4. Custom Image 
+4. Custom Image (Pro)
 5. Icon Individual Settings
 6. Global Settings
 7. Icon Demo From Astra Theme
 8. Icon Demo From Twenty Twenty Theme
 
 == Changelog ==
+
+= 1.1.5 - 1 Oct 2026 =
+- Security: The promotional notice is no longer printed on every wp-admin screen; it appears only on this plugin's own pages.
+- Security: A dismissed notice now stays dismissed. Previously the record was cleared once a campaign expired, so reissuing the same notice could bring it back.
+- Privacy: The notice request to the Themewant service is cached for 12 hours instead of being made on every admin page load, and the service is documented under "External services" with its privacy policy.
+- Fixed: The dashboard widget no longer re-orders the WordPress Dashboard to place itself above the core widgets.
+- Fixed: "Successfully data saved" corrected to "Data saved successfully."
+- Added: Requires at least and Requires PHP are now declared in the plugin header.
 
 = 1.1.4 - 13 Jul 2026 =
 - Security: Fixed an authenticated stored Cross-Site Scripting (XSS) vulnerability in the menu item icon settings. Added capability and nav menu item ownership checks to the icon AJAX handlers and escaped icon output on the front-end navigation. Props to Artus KG for the responsible disclosure.
@@ -129,10 +138,25 @@ See https://themewant.com/downloads/easy-menu-icons-pro/ screenshots
 
 This plugin makes use of the following third-party api and libraries to provide enhanced functionality and user experience. None of these api or libraries collect or transmit personal data outside your WordPress installation.
 
-Themewant
-This api only send notice and offer to the user. User dashboard loads the notice and display.
-Source: https://themewant.com/menuicon
-
-License: https://reactheme.com/products/license/
+Themewant notice service
+The plugin requests the notices and offers shown on its own admin screens. The
+request body carries only the plugin slug and which screen is asking, for
+example {"screen":"notice-bar","plugin":"easy-menu-icons"} - no site URL, no
+email address and no user information. The response is cached for 12 hours.
+Source: https://reactheme.com/products/license/wp-json/reacthemes/v1/get_thewtmc
 Privacy Policy: https://themewant.com/privacy-policy/
 Terms of Services: https://themewant.com/terms-of-condition/
+
+== Third-party libraries ==
+
+This plugin bundles the following library. Its minified build is shipped; the
+non-compressed source is published upstream at the link below.
+
+* Font Awesome Free - admin/assets/css/fontawesome.all.min.css and admin/assets/webfonts/
+  Source: https://github.com/FortAwesome/Font-Awesome
+  Home:   https://fontawesome.com/
+  Licence: icons CC BY 4.0, fonts SIL OFL 1.1, code MIT
+
+* jQuery QuickSearch - admin/assets/js/jquery.quicksearch.js (non-compressed)
+  Source: https://github.com/DeuxHuitHuit/jquery-quicksearch
+  Licence: MIT

@@ -82,7 +82,7 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
                 }
 
                 wp_send_json_success([
-                   'message' => esc_html__( 'Successfully data saved','easy-menu-icons' )
+                   'message' => esc_html__( 'Data saved successfully.','easy-menu-icons' )
                 ]);
 
             }
@@ -170,25 +170,21 @@ if ( !class_exists('EMICONS_Admin_Ajax')) {
 
                 
 
-                $emicons_item_icon_source_err = '';
-                if($emicons_item_icon_source !='dashicon' && $emicons_item_icon_source !='fontawesome'){
-                    $emicons_item_icon_source_err = 'emicons-pro-source-error';
+                // Dashicons and Font Awesome are the libraries this plugin ships.
+                // A value saved by the Pro add-on, or by an older release that
+                // listed more sources, falls back to Dashicons so an existing
+                // menu item still opens on a tab that has icons in it.
+                if ( ! in_array( $emicons_item_icon_source, array( 'dashicon', 'fontawesome' ), true ) ) {
+                    $emicons_item_icon_source = 'dashicon';
                 }
                 ?>
                     <div id="tabs-content">
                         <div id="tab1" class="tab-content">
-                            <form action="" onsubmit="return false" id='emicons_items_settings' class="<?php echo esc_attr($emicons_item_icon_source_err);?>">
+                            <form action="" onsubmit="return false" id='emicons_items_settings'>
                                 <div class="icon-source-wrapper">
                                     <select name="icon_source" id="emicons_source_select" data-menu_item_id="<?php echo esc_attr( $menu_item_id )?>">
                                         <option selected <?php echo $emicons_item_icon_source == 'dashicon' ? 'selected' : '' ?> value="dashicon">Dashicons</option>
                                         <option <?php echo $emicons_item_icon_source == 'fontawesome' ? 'selected' : '' ?> value="fontawesome">Fontawesome</option>
-                                        <option <?php echo $emicons_item_icon_source == 'elegant' ? 'selected' : '' ?> value="elegant">Elegant</option>
-                                        <option <?php echo $emicons_item_icon_source == 'foundation' ? 'selected' : '' ?> value="foundation">Foundation</option>
-                                        <option <?php echo $emicons_item_icon_source == 'elusive' ? 'selected' : '' ?> value="elusive">Elusive</option>
-                                        <option <?php echo $emicons_item_icon_source == 'themify' ? 'selected' : '' ?> value="themify">Themify</option>
-                                        <option <?php echo $emicons_item_icon_source == 'fontello' ? 'selected' : '' ?> value="fontello">Fontello</option>
-                                        <option <?php echo $emicons_item_icon_source == 'generic' ? 'selected' : '' ?> value="generic">Generic</option>
-                                        <option <?php echo $emicons_item_icon_source == 'custom' ? 'selected' : '' ?> value="custom">Custom</option>
                                     </select>
                                     <input type="search" name="search_rt_icon" class="search_rt_icon" id="search_rt_icon" placeholder="search here">
                                 </div>

@@ -422,19 +422,6 @@ div#emicons-menu-setting-modal p.form-status {
     padding: 20px;
     border-radius: 0 0 8px 8px;
 }
-.emicons-features-list-wrapper {
-    display: flex;
-    gap: 40px;
-}
-.emicons-features-list-wrapper .emicons-features-list {
-    background: #fff;
-    padding: 35px;
-    border-radius: 3px;
-    min-width: 220px;
-}
-.emicons-features-list-wrapper .emicons-features-list span.dashicons.dashicons-no {
-    color: red;
-}
 /* templates library */
 .emicons-templates-library .section-header {
     display: flex;
@@ -690,18 +677,6 @@ button.emicons_set_icon_dialog-closer {
 }
 .emicons_saved_icon_wrapper.has-icon .emicons_remove_icon_toggle_in_nav_item {
     display: inline;
-}
-#emicons_items_settings.emicons-pro-source-error .tabs{
-    background: #fff;
-}
-#emicons_items_settings.emicons-pro-source-error .tabs .icon-tab-contents-wrapper {
-    border-left: 2px solid red;
-    padding-left: 20px;
-    background: aliceblue;
-    width: 100%;
-}
-#emicons_items_settings.emicons-pro-source-error #emicons_set_icon_dialog {
-    box-shadow: none;
 }
 .emicons-notice {
     padding: 0 !important;

@@ -28,7 +28,7 @@ if ( ! function_exists( 'emicons_read_icons_json' ) ) {
     }
 }
 
- if($emicons_item_icon_source == 'dashicon'){
+ if($emicons_item_icon_source !== 'fontawesome'){
     ?>
         <div class="icon-tab-contents-wrapper">
             <div class="icon-tab-content active">
@@ -53,7 +53,7 @@ if ( ! function_exists( 'emicons_read_icons_json' ) ) {
         </div>
     <?php
  }
- else if($emicons_item_icon_source == 'fontawesome'){
+ else {
 
         $emicons_fontawesome_directory = 'admin/assets/json/font-awesome/';
                      ?>
@@ -127,16 +127,4 @@ if ( ! function_exists( 'emicons_read_icons_json' ) ) {
                             </div>
                         </div>
         <?php
-}else{
-    ?>
-        <div class="icon-tab-contents-wrapper">
-            <p class="warning"><?php
-                printf(
-                    /* translators: %s is the selected icon source name */
-                    esc_html__( 'Oops! You can\'t use icon from %s. Please use our premium plugin and enjoy all icons.', 'easy-menu-icons' ),
-                    esc_html( $emicons_item_icon_source )
-                );
-            ?></p>
-        </div>
-    <?php
 }

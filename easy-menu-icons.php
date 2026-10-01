@@ -1,12 +1,14 @@
 <?php
 /**
  * Plugin Name: Easy Menu Icons
- * Description: Design your navigation menus with modern icons and svg images.
+ * Description: Add Dashicons or Font Awesome icons to any WordPress menu item, with per-item and global styling.
  * Plugin URI:  https://themewant.com/downloads/easy-menu-icons-pro/
  * Author:      Themewant
  * Author URI:  http://themewant.com/
- * Version:     1.1.4
- * License:     GPL2
+ * Version:     1.1.5
+ * Requires at least: 6.0
+ * Requires PHP: 7.2
+ * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: easy-menu-icons
  * Domain Path: /languages
@@ -15,7 +17,7 @@
 
     if(!class_exists('EMICONS_PRO')) {
 
-        define( 'EMICONS_VERSION', '1.1.4' );
+        define( 'EMICONS_VERSION', '1.1.5' );
         define( 'EMICONS_PL_ROOT', __FILE__ );
         define( 'EMICONS_PL_URL', plugins_url( '/', EMICONS_PL_ROOT ) );
         define( 'EMICONS_PL_PATH', plugin_dir_path( EMICONS_PL_ROOT ) );
